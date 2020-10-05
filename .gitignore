@@ -10,3 +10,9 @@ Homestead.json
 Homestead.yaml
 npm-debug.log
 yarn-error.log
+
+# Front-end assets
+/public/js
+/public/css
+/public/build
+/public/mix-manifest.json
