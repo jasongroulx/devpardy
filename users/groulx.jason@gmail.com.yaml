@@ -1,0 +1,20 @@
+name: Jason
+super: true
+id: 3d84fd6e-6189-44c0-994f-86647b34a2ee
+password_hash: $2y$10$cRchRg8TPlyVE9Y8FbnRbehncl1zJZD37Z8UFTsOLaNtN1ylvpLGa
+preferences:
+  collections:
+    questions:
+      columns:
+        - topics
+        - title
+        - answer
+        - difficulty
+      filters:
+        vim_questions:
+          display: 'Vim Questions'
+          filters:
+            fields:
+              topics:
+                term: vim
+      after_save: create_another

@@ -1,0 +1,71 @@
+title: Questions
+sections:
+  main:
+    display: Main
+    fields:
+      -
+        handle: title
+        field:
+          type: text
+          required: true
+          validate:
+            - required
+          display: Question
+          listable: hidden
+          input_type: text
+      -
+        handle: answer
+        field:
+          input_type: text
+          display: Answer
+          type: text
+          icon: text
+          listable: hidden
+          validate:
+            - required
+      -
+        handle: topics
+        field:
+          type: terms
+          taxonomies:
+            - topics
+          display: Topics
+          mode: select
+          listable: hidden
+          max_items: 1
+          width: 50
+          validate:
+            - required
+      -
+        handle: difficulty
+        field:
+          options:
+            - $100
+            - $200
+            - $300
+            - $400
+            - $500
+          multiple: false
+          clearable: false
+          searchable: true
+          taggable: false
+          push_tags: false
+          cast_booleans: false
+          display: Difficulty
+          type: select
+          icon: select
+          listable: hidden
+          validate:
+            - required
+          width: 50
+  sidebar:
+    display: Sidebar
+    fields:
+      -
+        handle: slug
+        field:
+          type: slug
+          required: true
+          localizable: true
+          validate:
+            - required

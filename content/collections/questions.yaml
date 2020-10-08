@@ -1,0 +1,10 @@
+title: Questions
+template: default
+layout: layout
+taxonomies:
+  - topics
+revisions: false
+sort_dir: asc
+date_behavior:
+  past: public
+  future: private
