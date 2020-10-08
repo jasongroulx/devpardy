@@ -1,18 +1,15 @@
 /node_modules
 /public/hot
 /public/storage
+/public/vendor/statamic
 /storage/*.key
 /vendor
 .env
 .env.backup
 .phpunit.result.cache
+.php_cs.cache
 Homestead.json
 Homestead.yaml
 npm-debug.log
 yarn-error.log
-
-# Front-end assets
-/public/js
-/public/css
-/public/build
-/public/mix-manifest.json
+.DS_Store
