@@ -26,6 +26,11 @@ class Topics extends Tags
                 ];
             })
             ->groupBy('topic')
+            ->map(function ($item) {
+                return $item->groupBy('difficulty')
+                            ->map
+                            ->random();
+            })
             ->toJson();
     }
 
