@@ -1,7 +1,7 @@
 ---
 title: 'This key is used to navigate to the end of the line'
 answer: $
-difficulty: $200
+difficulty: 200
 updated_by: 3d84fd6e-6189-44c0-994f-86647b34a2ee
 updated_at: 1602122943
 topics: vim

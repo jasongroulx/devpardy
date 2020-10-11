@@ -24,6 +24,7 @@ class Topics extends Tags
                     'question' => $entry->get('title'),
                     'difficulty' => $entry->get('difficulty'),
                     'topic' => $this->getTopicTitle($entry->get('topics')),
+                    'completed' => false,
                 ];
             })
             ->groupBy('topic')

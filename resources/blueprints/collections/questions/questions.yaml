@@ -40,11 +40,11 @@ sections:
         handle: difficulty
         field:
           options:
-            - $100
-            - $200
-            - $300
-            - $400
-            - $500
+            100: $100
+            200: $200
+            300: $300
+            400: $400
+            500: $500
           multiple: false
           clearable: false
           searchable: true

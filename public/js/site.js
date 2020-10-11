@@ -1962,13 +1962,24 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['topics'],
   data: function data() {
     return {
       currentQuestion: null,
-      currentAnswer: null
+      currentAnswer: null,
+      currentUser: 'Jason',
+      scores: {
+        'Jason': 0,
+        'Jesse': 0
+      }
     };
   },
   computed: {},
@@ -1978,14 +1989,27 @@ __webpack_require__.r(__webpack_exports__);
       this.currentQuestion = selected;
     },
     submitAnswer: function submitAnswer() {
+      var _this = this;
+
       var payload = {
         id: this.currentQuestion.id,
         answer: this.currentAnswer
       };
-      console.log(this.currentQuestion);
       axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('answer', payload).then(function (response) {
-        console.log(response);
+        _this.handleAnswer(response.data);
+
+        console.log(response.data.correct);
       });
+    },
+    handleAnswer: function handleAnswer(response) {
+      if (response.correct) {
+        this.scores[this.currentUser] += this.currentQuestion.difficulty;
+      } else {// Show correct answer
+      }
+
+      this.currentQuestion.completed = true;
+      this.currentAnswer = null;
+      this.currentQuestion = null;
     }
   }
 });
@@ -2497,6 +2521,7 @@ var render = function() {
               return _c(
                 "div",
                 {
+                  key: question.id,
                   staticClass:
                     "text-gray-700 text-center bg-gray-400 px-4 py-2 m-2 py-5",
                   on: {
@@ -2505,13 +2530,31 @@ var render = function() {
                     }
                   }
                 },
-                [_vm._v("\n            " + _vm._s(difficulty) + "\n        ")]
+                [
+                  _c("span", { class: { "opacity-0": question.completed } }, [
+                    _vm._v(
+                      "\n                $" +
+                        _vm._s(difficulty) +
+                        "\n            "
+                    )
+                  ])
+                ]
               )
             })
           ],
           2
         )
       }),
+      _vm._v(" "),
+      _c(
+        "div",
+        _vm._l(_vm.scores, function(score, user) {
+          return _c("p", { key: user }, [
+            _vm._v(_vm._s(user) + " - $" + _vm._s(score))
+          ])
+        }),
+        0
+      ),
       _vm._v(" "),
       _vm.currentQuestion
         ? _c("div", [
@@ -14796,8 +14839,8 @@ var app = new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Users/jesseleite/Code/devpardy/resources/js/site.js */"./resources/js/site.js");
-module.exports = __webpack_require__(/*! /Users/jesseleite/Code/devpardy/resources/css/tailwind.css */"./resources/css/tailwind.css");
+__webpack_require__(/*! /Users/jasongroulx/code/devpardy/resources/js/site.js */"./resources/js/site.js");
+module.exports = __webpack_require__(/*! /Users/jasongroulx/code/devpardy/resources/css/tailwind.css */"./resources/css/tailwind.css");
 
 
 /***/ })

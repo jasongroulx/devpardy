@@ -1,7 +1,7 @@
 ---
 title: 'This phonic is used to delete a word'
 answer: daw
-difficulty: $100
+difficulty: 100
 topics: vim
 updated_by: 3d84fd6e-6189-44c0-994f-86647b34a2ee
 updated_at: 1602122737

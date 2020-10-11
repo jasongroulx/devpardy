@@ -10,11 +10,17 @@
             </div>
             <div
                 v-for="(question, difficulty) in questions"
+                :key="question.id"
                 @click="selectQuestion(question)"
                 class="text-gray-700 text-center bg-gray-400 px-4 py-2 m-2 py-5"
             >
-                {{ difficulty }}
+            <span :class="{'opacity-0' : question.completed}">
+                    ${{ difficulty }}
+                </span>
             </div>
+        </div>
+        <div>
+            <p v-for="(score, user) in scores" :key="user">{{ user }} - ${{ score }}</p>
         </div>
         <div v-if="currentQuestion">
             <h2>{{ currentQuestion.question }}</h2>
@@ -34,6 +40,11 @@ export default {
         return {
             currentQuestion: null,
             currentAnswer: null,
+            currentUser: 'Jason',
+            scores: {
+                'Jason': 0,
+                'Jesse': 0,
+            }
         }
     },
     computed: {
@@ -52,10 +63,21 @@ export default {
                 id: this.currentQuestion.id,
                 answer: this.currentAnswer,
             };
-console.log(this.currentQuestion);
+
             axios.post('answer', payload).then(response => {
-                console.log(response);
+                this.handleAnswer(response.data);
+                console.log(response.data.correct)
             });
+        },
+        handleAnswer(response) {
+            if (response.correct) {
+                this.scores[this.currentUser] += this.currentQuestion.difficulty;
+            } else {
+                // Show correct answer
+            }
+            this.currentQuestion.completed = true;
+            this.currentAnswer = null;
+            this.currentQuestion = null;
         }
     }
 };
