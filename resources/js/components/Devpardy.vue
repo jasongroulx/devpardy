@@ -17,13 +17,14 @@
             </div>
         </div>
         <div v-if="currentQuestion">
-            <h2>{{ currentQuestion }}</h2>
-            <textarea cols="30" rows="10"></textarea>
+            <h2>{{ currentQuestion.question }}</h2>
+            <input type="text" v-model="currentAnswer" @keydown.enter="submitAnswer" />
         </div>
     </div>
 </template>
 
 <script>
+import axios from 'axios';
 
 export default {
     props: [
@@ -31,7 +32,8 @@ export default {
     ],
     data() {
         return {
-            currentQuestion: null
+            currentQuestion: null,
+            currentAnswer: null,
         }
     },
     computed: {
@@ -42,7 +44,18 @@ export default {
     },
     methods: {
         selectQuestion(selected){
-            this.currentQuestion = selected.question;
+            this.currentQuestion = selected;
+        },
+
+        submitAnswer() {
+            let payload = {
+                id: this.currentQuestion.id,
+                answer: this.currentAnswer,
+            };
+console.log(this.currentQuestion);
+            axios.post('answer', payload).then(response => {
+                console.log(response);
+            });
         }
     }
 };
