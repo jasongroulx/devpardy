@@ -101,12 +101,39 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['topics'],
   data: function data() {
-    return {};
+    return {
+      currentQuestion: null
+    };
   },
-  mounted: function mounted() {}
+  computed: {},
+  mounted: function mounted() {},
+  methods: {
+    selectQuestion: function selectQuestion(selected) {
+      this.currentQuestion = selected.question;
+    }
+  }
 });
 
 /***/ }),
@@ -594,7 +621,54 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [_vm._v("\n    Test\n")])
+  return _c(
+    "div",
+    { staticClass: "flex" },
+    [
+      _vm._l(_vm.topics, function(questions, title) {
+        return _c(
+          "div",
+          { key: title, staticClass: "flex flex-col bg-gray-200 w-32" },
+          [
+            _c(
+              "div",
+              {
+                staticClass:
+                  "text-gray-700 text-center bg-gray-500 px-4 py-2 m-2 py-5"
+              },
+              [_c("p", [_vm._v(_vm._s(title))])]
+            ),
+            _vm._v(" "),
+            _vm._l(questions, function(question, difficulty) {
+              return _c(
+                "div",
+                {
+                  staticClass:
+                    "text-gray-700 text-center bg-gray-400 px-4 py-2 m-2 py-5",
+                  on: {
+                    click: function($event) {
+                      return _vm.selectQuestion(question)
+                    }
+                  }
+                },
+                [_vm._v("\n            " + _vm._s(difficulty) + "\n        ")]
+              )
+            })
+          ],
+          2
+        )
+      }),
+      _vm._v(" "),
+      _vm.currentQuestion
+        ? _c("div", [
+            _c("h2", [_vm._v(_vm._s(_vm.currentQuestion))]),
+            _vm._v(" "),
+            _c("textarea", { attrs: { cols: "30", rows: "10" } })
+          ])
+        : _vm._e()
+    ],
+    2
+  )
 }
 var staticRenderFns = []
 render._withStripped = true

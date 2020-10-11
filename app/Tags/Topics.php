@@ -20,16 +20,23 @@ class Topics extends Tags
             ->get()
             ->map(function ($entry) {
                 return [
+                    'id' => $entry->id(),
                     'question' => $entry->get('title'),
                     'difficulty' => $entry->get('difficulty'),
                     'topic' => $this->getTopicTitle($entry->get('topics')),
                 ];
             })
             ->groupBy('topic')
+            ->shuffle()
+            ->keyBy(function($items) {
+                return $items->first()['topic'];
+            })
+            ->take(6)
             ->map(function ($item) {
                 return $item->groupBy('difficulty')
                             ->map
-                            ->random();
+                            ->random()
+                            ->sortKeys();
             })
             ->toJson();
     }
