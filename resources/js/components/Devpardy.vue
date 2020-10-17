@@ -23,21 +23,28 @@
             <p v-for="(score, user) in scores" :key="user">{{ user }} - ${{ score }}</p>
         </div>
         <div v-if="currentQuestion">
+            <progress-bar key="quetionProgress" v-if="!showInput" :milliseconds="4000" @completed="showInput = true"/>
             <h2>{{ currentQuestion.question }}</h2>
-            <input type="text" v-model="currentAnswer" @keydown.enter="submitAnswer" />
+            <input v-if="showInput" type="text" v-model="currentAnswer" @keydown.enter="submitAnswer" autofocus/>
+            <progress-bar key="answerProgress" v-if="showInput" :milliseconds="3000" :reverse="true" @completed=""/>
         </div>
     </div>
 </template>
 
 <script>
 import axios from 'axios';
+import ProgressBar from './ProgressBar'
 
 export default {
+    components: {
+        ProgressBar,
+    },
     props: [
         'topics'
     ],
     data() {
         return {
+            showInput: false,
             currentQuestion: null,
             currentAnswer: null,
             currentUser: 'Jason',
@@ -48,10 +55,8 @@ export default {
         }
     },
     computed: {
-
     },
     mounted() {
-
     },
     methods: {
         selectQuestion(selected){

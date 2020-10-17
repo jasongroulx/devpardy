@@ -1937,6 +1937,9 @@ module.exports = {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _ProgressBar__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ProgressBar */ "./resources/js/components/ProgressBar.vue");
+//
+//
 //
 //
 //
@@ -1969,10 +1972,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 
+
 /* harmony default export */ __webpack_exports__["default"] = ({
+  components: {
+    ProgressBar: _ProgressBar__WEBPACK_IMPORTED_MODULE_1__["default"]
+  },
   props: ['topics'],
   data: function data() {
     return {
+      showInput: false,
       currentQuestion: null,
       currentAnswer: null,
       currentUser: 'Jason',
@@ -2010,6 +2018,81 @@ __webpack_require__.r(__webpack_exports__);
       this.currentQuestion.completed = true;
       this.currentAnswer = null;
       this.currentQuestion = null;
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ProgressBar.vue?vue&type=script&lang=js&":
+/*!**********************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/ProgressBar.vue?vue&type=script&lang=js& ***!
+  \**********************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: {
+    reverse: {
+      "default": false,
+      type: Boolean
+    },
+    milliseconds: {
+      required: true,
+      type: Number
+    }
+  },
+  data: function data() {
+    return {
+      value: 0
+    };
+  },
+  computed: {
+    width: function width() {
+      return "width:".concat(this.value, "%");
+    }
+  },
+  mounted: function mounted() {
+    this.setInitalValue();
+    this.reverse ? this.startCountdown() : this.startProgress();
+  },
+  created: function created() {},
+  methods: {
+    setInitalValue: function setInitalValue() {
+      this.value = this.reverse ? 100 : 0;
+    },
+    startProgress: function startProgress() {
+      var interval = setInterval(function () {
+        if (this.value == 100) {
+          clearInterval(interval);
+          this.$emit('completed');
+        } else {
+          this.value += 1;
+        }
+      }.bind(this), this.milliseconds / 100);
+    },
+    startCountdown: function startCountdown() {
+      var interval = setInterval(function () {
+        if (this.value == 0) {
+          clearInterval(interval);
+          this.$emit('completed');
+        } else {
+          this.value -= 1;
+        }
+      }.bind(this), this.milliseconds / 100);
     }
   }
 });
@@ -2557,43 +2640,106 @@ var render = function() {
       ),
       _vm._v(" "),
       _vm.currentQuestion
-        ? _c("div", [
-            _c("h2", [_vm._v(_vm._s(_vm.currentQuestion.question))]),
-            _vm._v(" "),
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.currentAnswer,
-                  expression: "currentAnswer"
-                }
-              ],
-              attrs: { type: "text" },
-              domProps: { value: _vm.currentAnswer },
-              on: {
-                keydown: function($event) {
-                  if (
-                    !$event.type.indexOf("key") &&
-                    _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
-                  ) {
-                    return null
-                  }
-                  return _vm.submitAnswer($event)
-                },
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
-                  }
-                  _vm.currentAnswer = $event.target.value
-                }
-              }
-            })
-          ])
+        ? _c(
+            "div",
+            [
+              !_vm.showInput
+                ? _c("progress-bar", {
+                    key: "quetionProgress",
+                    attrs: { milliseconds: 4000 },
+                    on: {
+                      completed: function($event) {
+                        _vm.showInput = true
+                      }
+                    }
+                  })
+                : _vm._e(),
+              _vm._v(" "),
+              _c("h2", [_vm._v(_vm._s(_vm.currentQuestion.question))]),
+              _vm._v(" "),
+              _vm.showInput
+                ? _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.currentAnswer,
+                        expression: "currentAnswer"
+                      }
+                    ],
+                    attrs: { type: "text", autofocus: "" },
+                    domProps: { value: _vm.currentAnswer },
+                    on: {
+                      keydown: function($event) {
+                        if (
+                          !$event.type.indexOf("key") &&
+                          _vm._k(
+                            $event.keyCode,
+                            "enter",
+                            13,
+                            $event.key,
+                            "Enter"
+                          )
+                        ) {
+                          return null
+                        }
+                        return _vm.submitAnswer($event)
+                      },
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.currentAnswer = $event.target.value
+                      }
+                    }
+                  })
+                : _vm._e(),
+              _vm._v(" "),
+              _vm.showInput
+                ? _c("progress-bar", {
+                    key: "answerProgress",
+                    attrs: { milliseconds: 3000, reverse: true },
+                    on: { completed: function($event) {} }
+                  })
+                : _vm._e()
+            ],
+            1
+          )
         : _vm._e()
     ],
     2
   )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ProgressBar.vue?vue&type=template&id=d4a6a2ea&":
+/*!**************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/ProgressBar.vue?vue&type=template&id=d4a6a2ea& ***!
+  \**************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "flex items-center w-64" }, [
+    _c("div", { staticClass: "w-full bg-white rounded-full mr-2" }, [
+      _c("div", {
+        staticClass: "rounded-full bg-green-500 h-2",
+        style: _vm.width
+      })
+    ])
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -14806,6 +14952,75 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Devpardy_vue_vue_type_template_id_2431f228___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Devpardy_vue_vue_type_template_id_2431f228___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/ProgressBar.vue":
+/*!*************************************************!*\
+  !*** ./resources/js/components/ProgressBar.vue ***!
+  \*************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _ProgressBar_vue_vue_type_template_id_d4a6a2ea___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ProgressBar.vue?vue&type=template&id=d4a6a2ea& */ "./resources/js/components/ProgressBar.vue?vue&type=template&id=d4a6a2ea&");
+/* harmony import */ var _ProgressBar_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ProgressBar.vue?vue&type=script&lang=js& */ "./resources/js/components/ProgressBar.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _ProgressBar_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _ProgressBar_vue_vue_type_template_id_d4a6a2ea___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _ProgressBar_vue_vue_type_template_id_d4a6a2ea___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/ProgressBar.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/ProgressBar.vue?vue&type=script&lang=js&":
+/*!**************************************************************************!*\
+  !*** ./resources/js/components/ProgressBar.vue?vue&type=script&lang=js& ***!
+  \**************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ProgressBar_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./ProgressBar.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ProgressBar.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ProgressBar_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/ProgressBar.vue?vue&type=template&id=d4a6a2ea&":
+/*!********************************************************************************!*\
+  !*** ./resources/js/components/ProgressBar.vue?vue&type=template&id=d4a6a2ea& ***!
+  \********************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ProgressBar_vue_vue_type_template_id_d4a6a2ea___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./ProgressBar.vue?vue&type=template&id=d4a6a2ea& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ProgressBar.vue?vue&type=template&id=d4a6a2ea&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ProgressBar_vue_vue_type_template_id_d4a6a2ea___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ProgressBar_vue_vue_type_template_id_d4a6a2ea___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
