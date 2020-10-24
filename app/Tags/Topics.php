@@ -22,7 +22,7 @@ class Topics extends Tags
                 return [
                     'id' => $entry->id(),
                     'question' => $entry->get('title'),
-                    'difficulty' => $entry->get('difficulty'),
+                    'difficulty' => (int) $entry->get('difficulty'),
                     'topic' => $this->getTopicTitle($entry->get('topics')),
                     'completed' => false,
                 ];
