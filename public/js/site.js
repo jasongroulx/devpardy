@@ -1971,6 +1971,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2018,6 +2027,8 @@ __webpack_require__.r(__webpack_exports__);
       this.currentQuestion.completed = true;
       this.currentAnswer = null;
       this.currentQuestion = null;
+      this.showInput = false;
+      this.$refs.quetionProgress.reset();
     }
   }
 });
@@ -2093,6 +2104,9 @@ __webpack_require__.r(__webpack_exports__);
           this.value -= 1;
         }
       }.bind(this), this.milliseconds / 100);
+    },
+    reset: function reset() {
+      this.value = 0;
     }
   }
 });
@@ -2646,6 +2660,7 @@ var render = function() {
               !_vm.showInput
                 ? _c("progress-bar", {
                     key: "quetionProgress",
+                    ref: "quetionProgress",
                     attrs: { milliseconds: 4000 },
                     on: {
                       completed: function($event) {
@@ -2698,7 +2713,7 @@ var render = function() {
               _vm.showInput
                 ? _c("progress-bar", {
                     key: "answerProgress",
-                    attrs: { milliseconds: 3000, reverse: true },
+                    attrs: { milliseconds: 7000, reverse: true },
                     on: { completed: function($event) {} }
                   })
                 : _vm._e()

@@ -23,10 +23,19 @@
             <p v-for="(score, user) in scores" :key="user">{{ user }} - ${{ score }}</p>
         </div>
         <div v-if="currentQuestion">
-            <progress-bar key="quetionProgress" v-if="!showInput" :milliseconds="4000" @completed="showInput = true"/>
+            <progress-bar
+                key="quetionProgress"
+                ref="quetionProgress"
+                v-if="!showInput" :milliseconds="4000"
+                @completed="showInput = true"/>
             <h2>{{ currentQuestion.question }}</h2>
             <input v-if="showInput" type="text" v-model="currentAnswer" @keydown.enter="submitAnswer" autofocus/>
-            <progress-bar key="answerProgress" v-if="showInput" :milliseconds="3000" :reverse="true" @completed=""/>
+            <progress-bar
+                key="answerProgress"
+                v-if="showInput"
+                :milliseconds="7000"
+                :reverse="true"
+                @completed=""/>
         </div>
     </div>
 </template>
@@ -83,6 +92,8 @@ export default {
             this.currentQuestion.completed = true;
             this.currentAnswer = null;
             this.currentQuestion = null;
+            this.showInput = false;
+            this.$refs.quetionProgress.reset()
         }
     }
 };

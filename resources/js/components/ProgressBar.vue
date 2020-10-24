@@ -43,7 +43,7 @@ export default {
         setInitalValue() {
             this.value = this.reverse ? 100 : 0;
         },
-        startProgress(){
+        startProgress() {
             let interval = setInterval(function(){
                 if (this.value == 100) {
                     clearInterval(interval);
@@ -53,7 +53,7 @@ export default {
                 }
             }.bind(this), this.milliseconds / 100);
         },
-        startCountdown(){
+        startCountdown() {
             let interval = setInterval(function(){
                 if (this.value == 0) {
                     clearInterval(interval);
@@ -63,6 +63,9 @@ export default {
                 }
             }.bind(this), this.milliseconds / 100);
         },
+        reset() {
+            this.value = 0;
+        }
     }
 };
 </script>
