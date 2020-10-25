@@ -11,8 +11,10 @@
     },
     "devDependencies": {
         "autoprefixer": "^9.7.6",
+        "browser-sync": "^2.26.13",
+        "browser-sync-webpack-plugin": "^2.0.1",
         "cross-env": "^5.1",
-        "laravel-mix": "^4.0",
+        "laravel-mix": "^5.0.7",
         "postcss-import": "^12.0.1",
         "postcss-nested": "^4.2.1",
         "postcss-preset-env": "^6.7.0",

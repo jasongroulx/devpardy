@@ -25,6 +25,21 @@ if (mix.inProduction()) {
 
 /*
  |--------------------------------------------------------------------------
+ | BrowserSync
+ |--------------------------------------------------------------------------
+ |
+ | https://laravel-mix.com/docs/5.0/browsersync
+ |
+ */
+if (!mix.inProduction()) {
+    mix.browserSync({
+        proxy: 'devpardy.test',
+        files: ['resources/views/*.html', 'resources/js/components/*.vue'],
+    });
+}
+
+/*
+ |--------------------------------------------------------------------------
  | Statamic Control Panel
  |--------------------------------------------------------------------------
  |
