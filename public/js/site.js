@@ -1980,6 +1980,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2003,6 +2005,10 @@ __webpack_require__.r(__webpack_exports__);
   mounted: function mounted() {},
   methods: {
     selectQuestion: function selectQuestion(selected) {
+      if (selected.completed) {
+        return;
+      }
+
       this.currentQuestion = selected;
     },
     submitAnswer: function submitAnswer() {
@@ -2014,8 +2020,6 @@ __webpack_require__.r(__webpack_exports__);
       };
       axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('answer', payload).then(function (response) {
         _this.handleAnswer(response.data);
-
-        console.log(response.data.correct);
       });
     },
     handleAnswer: function handleAnswer(response) {
@@ -2621,6 +2625,11 @@ var render = function() {
                   key: question.id,
                   staticClass:
                     "text-gray-700 text-center bg-gray-400 px-4 py-2 m-2 py-5",
+                  class: {
+                    "cursor-default": question.completed,
+                    "cursor-pointer": !question.completed
+                  },
+                  attrs: { completed: question.completed },
                   on: {
                     click: function($event) {
                       return _vm.selectQuestion(question)

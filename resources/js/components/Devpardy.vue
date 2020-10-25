@@ -11,10 +11,12 @@
             <div
                 v-for="(question, difficulty) in questions"
                 :key="question.id"
+                :completed="question.completed"
                 @click="selectQuestion(question)"
                 class="text-gray-700 text-center bg-gray-400 px-4 py-2 m-2 py-5"
+                :class="{'cursor-default': question.completed, 'cursor-pointer': !question.completed}"
             >
-            <span :class="{'opacity-0' : question.completed}">
+                <span :class="{'opacity-0' : question.completed}">
                     ${{ difficulty }}
                 </span>
             </div>
@@ -69,6 +71,10 @@ export default {
     },
     methods: {
         selectQuestion(selected){
+            if (selected.completed) {
+               return;
+            }
+
             this.currentQuestion = selected;
         },
 
@@ -80,7 +86,6 @@ export default {
 
             axios.post('answer', payload).then(response => {
                 this.handleAnswer(response.data);
-                console.log(response.data.correct)
             });
         },
         handleAnswer(response) {
