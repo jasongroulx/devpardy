@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AnswerController;
+use App\Events\PlayerJoinedGame;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,8 +15,9 @@ use App\Http\Controllers\AnswerController;
 |
 */
 
-// Route::statamic('example', 'example-view', [
-//    'title' => 'Example'
-// ]);
+Route::get('example', function() {
+    PlayerJoinedGame::dispatch();
+    return 'example';
+});
 
 Route::post('answer', AnswerController::class);
