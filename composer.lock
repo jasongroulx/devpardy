@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "99d87d5aece4b747c3a57a73ae53225a",
+    "content-hash": "07b0b824c6a8c007ac1a6b8a232d6ed0",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -3464,20 +3464,21 @@
         },
         {
             "name": "statamic/cms",
-            "version": "v3.0.20",
+            "version": "v3.0.22",
             "source": {
                 "type": "git",
                 "url": "https://github.com/statamic/cms.git",
-                "reference": "f5a219595a9296ea433df61b8381dfc0d75f435d"
+                "reference": "3bba31771fbe516b43c046c543990a07ca4333a6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/statamic/cms/zipball/f5a219595a9296ea433df61b8381dfc0d75f435d",
-                "reference": "f5a219595a9296ea433df61b8381dfc0d75f435d",
+                "url": "https://api.github.com/repos/statamic/cms/zipball/3bba31771fbe516b43c046c543990a07ca4333a6",
+                "reference": "3bba31771fbe516b43c046c543990a07ca4333a6",
                 "shasum": ""
             },
             "require": {
-                "composer/composer": "^1.10",
+                "composer/composer": "^1.10 || ^2.0.0",
+                "ext-json": "*",
                 "facade/ignition-contracts": "^1.0",
                 "guzzlehttp/guzzle": "^6.3 || ^7.0",
                 "laravel/framework": "^6.0 || ^7.0 || ^8.0",
@@ -3486,7 +3487,7 @@
                 "league/csv": "^9.0",
                 "league/glide": "^1.1",
                 "michelf/php-smartypants": "^1.8",
-                "pixelfear/composer-dist-plugin": "^0.1.0",
+                "pixelfear/composer-dist-plugin": "^0.1.4",
                 "spatie/blink": "^1.1.2",
                 "statamic/stringy": "^3.1",
                 "symfony/var-exporter": "^4.3",
@@ -3541,7 +3542,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2020-10-20T18:15:28+00:00"
+            "time": "2020-10-29T14:21:22+00:00"
         },
         {
             "name": "statamic/stringy",
@@ -8367,5 +8368,5 @@
         "php": "^7.3"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.0.0"
+    "plugin-api-version": "1.1.0"
 }

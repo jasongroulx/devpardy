@@ -1982,6 +1982,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2028,11 +2032,17 @@ __webpack_require__.r(__webpack_exports__);
       } else {// Show correct answer
       }
 
+      this.resetState();
+    },
+    handleTimesUp: function handleTimesUp() {
+      // Show correct answer
+      this.resetState();
+    },
+    resetState: function resetState() {
       this.currentQuestion.completed = true;
       this.currentAnswer = null;
       this.currentQuestion = null;
       this.showInput = false;
-      this.$refs.quetionProgress.reset();
     }
   }
 });
@@ -2600,68 +2610,67 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    { staticClass: "flex" },
-    [
-      _vm._l(_vm.topics, function(questions, title) {
-        return _c(
+  return _c("div", [
+    !_vm.currentQuestion
+      ? _c(
           "div",
-          { key: title, staticClass: "flex flex-col bg-gray-200 w-32" },
-          [
-            _c(
+          { staticClass: "flex board" },
+          _vm._l(_vm.topics, function(questions, title) {
+            return _c(
               "div",
-              {
-                staticClass:
-                  "text-gray-700 text-center bg-gray-500 px-4 py-2 m-2 py-5"
-              },
-              [_c("p", [_vm._v(_vm._s(title))])]
-            ),
-            _vm._v(" "),
-            _vm._l(questions, function(question, difficulty) {
-              return _c(
-                "div",
-                {
-                  key: question.id,
-                  staticClass:
-                    "text-gray-700 text-center bg-gray-400 px-4 py-2 m-2 py-5",
-                  class: {
-                    "cursor-default": question.completed,
-                    "cursor-pointer": !question.completed
+              { key: title, staticClass: "flex flex-col bg-gray-200 w-32" },
+              [
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "text-gray-700 text-center bg-gray-500 px-4 py-2 m-2 py-5"
                   },
-                  attrs: { completed: question.completed },
-                  on: {
-                    click: function($event) {
-                      return _vm.selectQuestion(question)
-                    }
-                  }
-                },
-                [
-                  _c("span", { class: { "opacity-0": question.completed } }, [
-                    _vm._v(
-                      "\n                $" +
-                        _vm._s(difficulty) +
-                        "\n            "
-                    )
-                  ])
-                ]
-              )
-            })
-          ],
-          2
+                  [_c("p", [_vm._v(_vm._s(title))])]
+                ),
+                _vm._v(" "),
+                _vm._l(questions, function(question, difficulty) {
+                  return _c(
+                    "div",
+                    {
+                      key: question.id,
+                      staticClass:
+                        "text-gray-700 text-center bg-gray-400 px-4 py-2 m-2 py-5",
+                      class: {
+                        "cursor-default": question.completed,
+                        "cursor-pointer": !question.completed
+                      },
+                      attrs: { completed: question.completed },
+                      on: {
+                        click: function($event) {
+                          return _vm.selectQuestion(question)
+                        }
+                      }
+                    },
+                    [
+                      _c(
+                        "span",
+                        { class: { "opacity-0": question.completed } },
+                        [
+                          _vm._v(
+                            "\n                    $" +
+                              _vm._s(difficulty) +
+                              "\n                "
+                          )
+                        ]
+                      )
+                    ]
+                  )
+                })
+              ],
+              2
+            )
+          }),
+          0
         )
-      }),
-      _vm._v(" "),
-      _c(
-        "div",
-        _vm._l(_vm.scores, function(score, user) {
-          return _c("p", { key: user }, [
-            _vm._v(_vm._s(user) + " - $" + _vm._s(score))
-          ])
-        }),
-        0
-      ),
-      _vm._v(" "),
+      : _vm._e(),
+    _vm._v(" "),
+    _c("div", { staticClass: "question" }, [
       _vm.currentQuestion
         ? _c(
             "div",
@@ -2669,7 +2678,6 @@ var render = function() {
               !_vm.showInput
                 ? _c("progress-bar", {
                     key: "quetionProgress",
-                    ref: "quetionProgress",
                     attrs: { milliseconds: 4000 },
                     on: {
                       completed: function($event) {
@@ -2723,16 +2731,25 @@ var render = function() {
                 ? _c("progress-bar", {
                     key: "answerProgress",
                     attrs: { milliseconds: 7000, reverse: true },
-                    on: { completed: function($event) {} }
+                    on: { completed: _vm.handleTimesUp }
                   })
                 : _vm._e()
             ],
             1
           )
         : _vm._e()
-    ],
-    2
-  )
+    ]),
+    _vm._v(" "),
+    _c(
+      "div",
+      _vm._l(_vm.scores, function(score, user) {
+        return _c("p", { key: user }, [
+          _vm._v(_vm._s(user) + " - $" + _vm._s(score))
+        ])
+      }),
+      0
+    )
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true
