@@ -30,7 +30,7 @@
                     v-if="!showInput" :milliseconds="4000"
                     @completed="showInput = true"/>
                     <h2>{{ currentQuestion.question }}</h2>
-                    <input v-if="showInput" type="text" v-model="currentAnswer" @keydown.enter="submitAnswer" autofocus/>
+                    <input class="text-black" v-if="showInput" type="text" v-model="currentAnswer" @keydown.enter="submitAnswer" autofocus/>
                     <progress-bar
                         key="answerProgress"
                         v-if="showInput"

@@ -2699,6 +2699,7 @@ var render = function() {
                         expression: "currentAnswer"
                       }
                     ],
+                    staticClass: "text-black",
                     attrs: { type: "text", autofocus: "" },
                     domProps: { value: _vm.currentAnswer },
                     on: {
@@ -15341,8 +15342,8 @@ var app = new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Users/maximsiebert/Documents/Projects/devpardy/resources/js/site.js */"./resources/js/site.js");
-module.exports = __webpack_require__(/*! /Users/maximsiebert/Documents/Projects/devpardy/resources/css/tailwind.css */"./resources/css/tailwind.css");
+__webpack_require__(/*! /Users/jasongroulx/Developer/Sandbox/devpardy/resources/js/site.js */"./resources/js/site.js");
+module.exports = __webpack_require__(/*! /Users/jasongroulx/Developer/Sandbox/devpardy/resources/css/tailwind.css */"./resources/css/tailwind.css");
 
 
 /***/ })
