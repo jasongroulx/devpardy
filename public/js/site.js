@@ -1986,6 +1986,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2610,147 +2617,181 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    !_vm.currentQuestion
-      ? _c(
-          "div",
-          { staticClass: "flex board" },
-          _vm._l(_vm.topics, function(questions, title) {
-            return _c(
-              "div",
-              { key: title, staticClass: "flex flex-col bg-gray-200 w-32" },
-              [
-                _c(
+  return _c(
+    "div",
+    { staticClass: "mx-auto max-w-screen-xl px-4 pb-4 -mt-8 z-10 relative" },
+    [
+      !_vm.currentQuestion
+        ? _c(
+            "div",
+            {
+              staticClass:
+                "bg-purple-900 border-2 border-white rounded-lg flex flex-wrap overflow-hidden"
+            },
+            [
+              _vm._l(_vm.topics, function(questions, title) {
+                return _c(
                   "div",
                   {
+                    key: title,
                     staticClass:
-                      "text-gray-700 text-center bg-gray-500 px-4 py-2 m-2 py-5"
+                      "w-1/6 last:border-r-0 border-r border-white border-opacity-25 even:bg-purple-800"
                   },
-                  [_c("p", [_vm._v(_vm._s(title))])]
-                ),
-                _vm._v(" "),
-                _vm._l(questions, function(question, difficulty) {
-                  return _c(
-                    "div",
-                    {
-                      key: question.id,
-                      staticClass:
-                        "text-gray-700 text-center bg-gray-400 px-4 py-2 m-2 py-5",
-                      class: {
-                        "cursor-default": question.completed,
-                        "cursor-pointer": !question.completed
+                  [
+                    _c(
+                      "div",
+                      {
+                        staticClass:
+                          "px-4 py-10 text-center border-b border-white border-opacity-25 last:border-b-0 uppercase font-bold"
                       },
-                      attrs: { completed: question.completed },
-                      on: {
-                        click: function($event) {
-                          return _vm.selectQuestion(question)
-                        }
-                      }
-                    },
-                    [
-                      _c(
-                        "span",
-                        { class: { "opacity-0": question.completed } },
+                      [_c("p", [_vm._v(_vm._s(title))])]
+                    ),
+                    _vm._v(" "),
+                    _vm._l(questions, function(question, difficulty) {
+                      return _c(
+                        "div",
+                        {
+                          key: question.id,
+                          staticClass:
+                            "px-4 py-6 text-center border-b border-white border-opacity-25 last:border-b-0 text-3xl font-bold",
+                          class: {
+                            "cursor-default": question.completed,
+                            "cursor-pointer": !question.completed
+                          },
+                          attrs: { completed: question.completed },
+                          on: {
+                            click: function($event) {
+                              return _vm.selectQuestion(question)
+                            }
+                          }
+                        },
                         [
-                          _vm._v(
-                            "\n                    $" +
-                              _vm._s(difficulty) +
-                              "\n                "
+                          _c(
+                            "span",
+                            { class: { "opacity-0": question.completed } },
+                            [
+                              _vm._v(
+                                "\n                    $" +
+                                  _vm._s(difficulty) +
+                                  "\n                "
+                              )
+                            ]
                           )
                         ]
                       )
+                    })
+                  ],
+                  2
+                )
+              }),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass:
+                    "flex w-full text-center uppercase text-sm bg-gradient-to-r from-orange-300 via-pink-500 to-purple-600"
+                },
+                _vm._l(_vm.scores, function(score, user) {
+                  return _c(
+                    "div",
+                    {
+                      key: user,
+                      staticClass:
+                        "w-1/3 p-2 last:border-r-0 border-r border-white border-opacity-25"
+                    },
+                    [
+                      _c("div", { staticClass: "p-2 rounded-lg" }, [
+                        _vm._v(
+                          "\n                    " +
+                            _vm._s(user) +
+                            "\n                    "
+                        ),
+                        _c("div", { staticClass: "text-4xl font-bold" }, [
+                          _vm._v(_vm._s(score))
+                        ])
+                      ])
                     ]
                   )
-                })
-              ],
-              2
-            )
-          }),
-          0
-        )
-      : _vm._e(),
-    _vm._v(" "),
-    _c("div", { staticClass: "question" }, [
-      _vm.currentQuestion
-        ? _c(
-            "div",
-            [
-              !_vm.showInput
-                ? _c("progress-bar", {
-                    key: "quetionProgress",
-                    attrs: { milliseconds: 4000 },
-                    on: {
-                      completed: function($event) {
-                        _vm.showInput = true
-                      }
-                    }
-                  })
-                : _vm._e(),
-              _vm._v(" "),
-              _c("h2", [_vm._v(_vm._s(_vm.currentQuestion.question))]),
-              _vm._v(" "),
-              _vm.showInput
-                ? _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.currentAnswer,
-                        expression: "currentAnswer"
-                      }
-                    ],
-                    staticClass: "text-black",
-                    attrs: { type: "text", autofocus: "" },
-                    domProps: { value: _vm.currentAnswer },
-                    on: {
-                      keydown: function($event) {
-                        if (
-                          !$event.type.indexOf("key") &&
-                          _vm._k(
-                            $event.keyCode,
-                            "enter",
-                            13,
-                            $event.key,
-                            "Enter"
-                          )
-                        ) {
-                          return null
-                        }
-                        return _vm.submitAnswer($event)
-                      },
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
-                        }
-                        _vm.currentAnswer = $event.target.value
-                      }
-                    }
-                  })
-                : _vm._e(),
-              _vm._v(" "),
-              _vm.showInput
-                ? _c("progress-bar", {
-                    key: "answerProgress",
-                    attrs: { milliseconds: 7000, reverse: true },
-                    on: { completed: _vm.handleTimesUp }
-                  })
-                : _vm._e()
+                }),
+                0
+              )
             ],
-            1
+            2
           )
-        : _vm._e()
-    ]),
-    _vm._v(" "),
-    _c(
-      "div",
-      _vm._l(_vm.scores, function(score, user) {
-        return _c("p", { key: user }, [
-          _vm._v(_vm._s(user) + " - $" + _vm._s(score))
-        ])
-      }),
-      0
-    )
-  ])
+        : _vm._e(),
+      _vm._v(" "),
+      _c("div", { staticClass: "question" }, [
+        _vm.currentQuestion
+          ? _c(
+              "div",
+              [
+                !_vm.showInput
+                  ? _c("progress-bar", {
+                      key: "quetionProgress",
+                      attrs: { milliseconds: 4000 },
+                      on: {
+                        completed: function($event) {
+                          _vm.showInput = true
+                        }
+                      }
+                    })
+                  : _vm._e(),
+                _vm._v(" "),
+                _c("h2", [_vm._v(_vm._s(_vm.currentQuestion.question))]),
+                _vm._v(" "),
+                _vm.showInput
+                  ? _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.currentAnswer,
+                          expression: "currentAnswer"
+                        }
+                      ],
+                      staticClass: "text-black",
+                      attrs: { type: "text", autofocus: "" },
+                      domProps: { value: _vm.currentAnswer },
+                      on: {
+                        keydown: function($event) {
+                          if (
+                            !$event.type.indexOf("key") &&
+                            _vm._k(
+                              $event.keyCode,
+                              "enter",
+                              13,
+                              $event.key,
+                              "Enter"
+                            )
+                          ) {
+                            return null
+                          }
+                          return _vm.submitAnswer($event)
+                        },
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.currentAnswer = $event.target.value
+                        }
+                      }
+                    })
+                  : _vm._e(),
+                _vm._v(" "),
+                _vm.showInput
+                  ? _c("progress-bar", {
+                      key: "answerProgress",
+                      attrs: { milliseconds: 7000, reverse: true },
+                      on: { completed: _vm.handleTimesUp }
+                    })
+                  : _vm._e()
+              ],
+              1
+            )
+          : _vm._e()
+      ])
+    ]
+  )
 }
 var staticRenderFns = []
 render._withStripped = true

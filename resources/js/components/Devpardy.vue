@@ -1,12 +1,12 @@
 <template>
-    <div>
-        <div v-if="!currentQuestion" class="flex board">
+    <div class="mx-auto max-w-screen-xl px-4 pb-4 -mt-8 z-10 relative">
+        <div v-if="!currentQuestion" class="bg-purple-900 border-2 border-white rounded-lg flex flex-wrap overflow-hidden">
             <div
                 v-for="(questions, title) in topics"
                 :key="title"
-                class="flex flex-col bg-gray-200 w-32"
+                class="w-1/6 last:border-r-0 border-r border-white border-opacity-25 even:bg-purple-800"
                 >
-                <div class="text-gray-700 text-center bg-gray-500 px-4 py-2 m-2 py-5">
+                <div class="px-4 py-10 text-center border-b border-white border-opacity-25 last:border-b-0 uppercase font-bold">
                     <p>{{ title }}</p>
                 </div>
                 <div
@@ -14,7 +14,7 @@
                     :key="question.id"
                     :completed="question.completed"
                     @click="selectQuestion(question)"
-                    class="text-gray-700 text-center bg-gray-400 px-4 py-2 m-2 py-5"
+                    class="px-4 py-6 text-center border-b border-white border-opacity-25 last:border-b-0 text-3xl font-bold"
                     :class="{'cursor-default': question.completed, 'cursor-pointer': !question.completed}"
                     >
                     <span :class="{'opacity-0' : question.completed}">
@@ -22,7 +22,16 @@
                     </span>
                 </div>
             </div>
+            <div class="flex w-full text-center uppercase text-sm bg-gradient-to-r from-orange-300 via-pink-500 to-purple-600">
+                <div v-for="(score, user) in scores" :key="user" class="w-1/3 p-2 last:border-r-0 border-r border-white border-opacity-25">
+                    <div class="p-2 rounded-lg">
+                        {{ user }}
+                        <div class="text-4xl font-bold">{{ score }}</div>
+                    </div>
+                </div>
+            </div>
         </div>
+
         <div class="question">
             <div v-if="currentQuestion">
                 <progress-bar
@@ -39,9 +48,7 @@
                         @completed="handleTimesUp"/>
             </div>
         </div>
-        <div>
-            <p v-for="(score, user) in scores" :key="user">{{ user }} - ${{ score }}</p>
-        </div>
+
     </div>
 
 </template>
