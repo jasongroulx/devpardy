@@ -2621,16 +2621,16 @@ var render = function() {
     "div",
     { staticClass: "mx-auto max-w-screen-xl px-4 pb-4 -mt-8 z-10 relative" },
     [
-      !_vm.currentQuestion
-        ? _c(
-            "div",
-            {
-              staticClass:
-                "bg-purple-900 border-2 border-white rounded-lg flex flex-wrap overflow-hidden"
-            },
-            [
-              _vm._l(_vm.topics, function(questions, title) {
-                return _c(
+      _c(
+        "div",
+        {
+          staticClass:
+            "bg-purple-900 border-2 border-white rounded-lg flex flex-wrap overflow-hidden"
+        },
+        [
+          _vm._l(_vm.topics, function(questions, title) {
+            return !_vm.currentQuestion
+              ? _c(
                   "div",
                   {
                     key: title,
@@ -2683,113 +2683,114 @@ var render = function() {
                   ],
                   2
                 )
-              }),
-              _vm._v(" "),
-              _c(
+              : _vm._e()
+          }),
+          _vm._v(" "),
+          _vm.currentQuestion
+            ? _c(
+                "div",
+                { staticClass: "p-20" },
+                [
+                  !_vm.showInput
+                    ? _c("progress-bar", {
+                        key: "quetionProgress",
+                        attrs: { milliseconds: 4000 },
+                        on: {
+                          completed: function($event) {
+                            _vm.showInput = true
+                          }
+                        }
+                      })
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _c("h2", { staticClass: "text-3xl text-center" }, [
+                    _vm._v(_vm._s(_vm.currentQuestion.question))
+                  ]),
+                  _vm._v(" "),
+                  _vm.showInput
+                    ? _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.currentAnswer,
+                            expression: "currentAnswer"
+                          }
+                        ],
+                        staticClass: "text-black",
+                        attrs: { type: "text", autofocus: "" },
+                        domProps: { value: _vm.currentAnswer },
+                        on: {
+                          keydown: function($event) {
+                            if (
+                              !$event.type.indexOf("key") &&
+                              _vm._k(
+                                $event.keyCode,
+                                "enter",
+                                13,
+                                $event.key,
+                                "Enter"
+                              )
+                            ) {
+                              return null
+                            }
+                            return _vm.submitAnswer($event)
+                          },
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.currentAnswer = $event.target.value
+                          }
+                        }
+                      })
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.showInput
+                    ? _c("progress-bar", {
+                        key: "answerProgress",
+                        attrs: { milliseconds: 7000, reverse: true },
+                        on: { completed: _vm.handleTimesUp }
+                      })
+                    : _vm._e()
+                ],
+                1
+              )
+            : _vm._e(),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass:
+                "flex w-full text-center uppercase text-sm bg-gradient-to-r from-orange-300 via-pink-500 to-purple-600"
+            },
+            _vm._l(_vm.scores, function(score, user) {
+              return _c(
                 "div",
                 {
+                  key: user,
                   staticClass:
-                    "flex w-full text-center uppercase text-sm bg-gradient-to-r from-orange-300 via-pink-500 to-purple-600"
+                    "w-1/3 p-2 last:border-r-0 border-r border-white border-opacity-25"
                 },
-                _vm._l(_vm.scores, function(score, user) {
-                  return _c(
-                    "div",
-                    {
-                      key: user,
-                      staticClass:
-                        "w-1/3 p-2 last:border-r-0 border-r border-white border-opacity-25"
-                    },
-                    [
-                      _c("div", { staticClass: "p-2 rounded-lg" }, [
-                        _vm._v(
-                          "\n                    " +
-                            _vm._s(user) +
-                            "\n                    "
-                        ),
-                        _c("div", { staticClass: "text-4xl font-bold" }, [
-                          _vm._v(_vm._s(score))
-                        ])
-                      ])
-                    ]
-                  )
-                }),
-                0
+                [
+                  _c("div", { staticClass: "p-2 rounded-lg" }, [
+                    _vm._v(
+                      "\n                    " +
+                        _vm._s(user) +
+                        "\n                    "
+                    ),
+                    _c("div", { staticClass: "text-4xl font-bold" }, [
+                      _vm._v(_vm._s(score))
+                    ])
+                  ])
+                ]
               )
-            ],
-            2
+            }),
+            0
           )
-        : _vm._e(),
-      _vm._v(" "),
-      _c("div", { staticClass: "question" }, [
-        _vm.currentQuestion
-          ? _c(
-              "div",
-              [
-                !_vm.showInput
-                  ? _c("progress-bar", {
-                      key: "quetionProgress",
-                      attrs: { milliseconds: 4000 },
-                      on: {
-                        completed: function($event) {
-                          _vm.showInput = true
-                        }
-                      }
-                    })
-                  : _vm._e(),
-                _vm._v(" "),
-                _c("h2", [_vm._v(_vm._s(_vm.currentQuestion.question))]),
-                _vm._v(" "),
-                _vm.showInput
-                  ? _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.currentAnswer,
-                          expression: "currentAnswer"
-                        }
-                      ],
-                      staticClass: "text-black",
-                      attrs: { type: "text", autofocus: "" },
-                      domProps: { value: _vm.currentAnswer },
-                      on: {
-                        keydown: function($event) {
-                          if (
-                            !$event.type.indexOf("key") &&
-                            _vm._k(
-                              $event.keyCode,
-                              "enter",
-                              13,
-                              $event.key,
-                              "Enter"
-                            )
-                          ) {
-                            return null
-                          }
-                          return _vm.submitAnswer($event)
-                        },
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.currentAnswer = $event.target.value
-                        }
-                      }
-                    })
-                  : _vm._e(),
-                _vm._v(" "),
-                _vm.showInput
-                  ? _c("progress-bar", {
-                      key: "answerProgress",
-                      attrs: { milliseconds: 7000, reverse: true },
-                      on: { completed: _vm.handleTimesUp }
-                    })
-                  : _vm._e()
-              ],
-              1
-            )
-          : _vm._e()
-      ])
+        ],
+        2
+      )
     ]
   )
 }

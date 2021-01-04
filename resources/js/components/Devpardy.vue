@@ -1,7 +1,8 @@
 <template>
     <div class="mx-auto max-w-screen-xl px-4 pb-4 -mt-8 z-10 relative">
-        <div v-if="!currentQuestion" class="bg-purple-900 border-2 border-white rounded-lg flex flex-wrap overflow-hidden">
+        <div class="bg-purple-900 border-2 border-white rounded-lg flex flex-wrap overflow-hidden">
             <div
+                v-if="!currentQuestion"
                 v-for="(questions, title) in topics"
                 :key="title"
                 class="w-1/6 last:border-r-0 border-r border-white border-opacity-25 even:bg-purple-800"
@@ -22,6 +23,20 @@
                     </span>
                 </div>
             </div>
+                <div class="p-20" v-if="currentQuestion">
+                    <progress-bar
+                        key="quetionProgress"
+                        v-if="!showInput" :milliseconds="4000"
+                        @completed="showInput = true"/>
+                        <h2 class="text-3xl text-center">{{ currentQuestion.question }}</h2>
+                        <input class="text-black" v-if="showInput" type="text" v-model="currentAnswer" @keydown.enter="submitAnswer" autofocus/>
+                        <progress-bar
+                            key="answerProgress"
+                            v-if="showInput"
+                            :milliseconds="7000"
+                            :reverse="true"
+                            @completed="handleTimesUp"/>
+                </div>
             <div class="flex w-full text-center uppercase text-sm bg-gradient-to-r from-orange-300 via-pink-500 to-purple-600">
                 <div v-for="(score, user) in scores" :key="user" class="w-1/3 p-2 last:border-r-0 border-r border-white border-opacity-25">
                     <div class="p-2 rounded-lg">
@@ -32,22 +47,7 @@
             </div>
         </div>
 
-        <div class="question">
-            <div v-if="currentQuestion">
-                <progress-bar
-                    key="quetionProgress"
-                    v-if="!showInput" :milliseconds="4000"
-                    @completed="showInput = true"/>
-                    <h2>{{ currentQuestion.question }}</h2>
-                    <input class="text-black" v-if="showInput" type="text" v-model="currentAnswer" @keydown.enter="submitAnswer" autofocus/>
-                    <progress-bar
-                        key="answerProgress"
-                        v-if="showInput"
-                        :milliseconds="7000"
-                        :reverse="true"
-                        @completed="handleTimesUp"/>
-            </div>
-        </div>
+        
 
     </div>
 
@@ -72,7 +72,7 @@ export default {
             currentUser: 'Jason',
             scores: {
                 'Jason': 0,
-                'Jesse': 0,
+                'Dan': 0,
             }
         }
     },
