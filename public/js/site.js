@@ -1993,6 +1993,28 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2008,7 +2030,7 @@ __webpack_require__.r(__webpack_exports__);
       currentUser: 'Jason',
       scores: {
         'Jason': 0,
-        'Jesse': 0
+        'Dan': 0
       }
     };
   },
@@ -2625,24 +2647,30 @@ var render = function() {
         "div",
         {
           staticClass:
-            "bg-purple-900 border-2 border-white rounded-lg flex flex-wrap overflow-hidden"
+            "rounded-lg overflow-hidden p-1 bg-gradient-to-r from-yellow-500 to-pink-600"
         },
         [
-          _vm._l(_vm.topics, function(questions, title) {
-            return !_vm.currentQuestion
-              ? _c(
+          _c(
+            "div",
+            {
+              staticClass:
+                "relative flex flex-wrap overflow-hidden bg-purple-900 rounded-md"
+            },
+            [
+              _vm._l(_vm.topics, function(questions, title) {
+                return _c(
                   "div",
                   {
                     key: title,
                     staticClass:
-                      "w-1/6 last:border-r-0 border-r border-white border-opacity-25 even:bg-purple-800"
+                      "w-1/6 last:border-r-0 border-r border-purple-600 even:bg-purple-800"
                   },
                   [
                     _c(
                       "div",
                       {
                         staticClass:
-                          "px-4 py-10 text-center border-b border-white border-opacity-25 last:border-b-0 uppercase font-bold"
+                          "px-4 py-10 text-center border-b border-purple-600 uppercase font-bold"
                       },
                       [_c("p", [_vm._v(_vm._s(title))])]
                     ),
@@ -2653,7 +2681,7 @@ var render = function() {
                         {
                           key: question.id,
                           staticClass:
-                            "px-4 py-6 text-center border-b border-white border-opacity-25 last:border-b-0 text-3xl font-bold",
+                            "px-4 py-6 text-center border-b border-purple-600 text-3xl font-bold",
                           class: {
                             "cursor-default": question.completed,
                             "cursor-pointer": !question.completed
@@ -2671,9 +2699,9 @@ var render = function() {
                             { class: { "opacity-0": question.completed } },
                             [
                               _vm._v(
-                                "\n                    $" +
+                                "\n                        $" +
                                   _vm._s(difficulty) +
-                                  "\n                "
+                                  "\n                    "
                               )
                             ]
                           )
@@ -2683,32 +2711,62 @@ var render = function() {
                   ],
                   2
                 )
-              : _vm._e()
-          }),
-          _vm._v(" "),
-          _vm.currentQuestion
-            ? _c(
-                "div",
-                { staticClass: "p-20" },
-                [
-                  !_vm.showInput
-                    ? _c("progress-bar", {
-                        key: "quetionProgress",
-                        attrs: { milliseconds: 4000 },
-                        on: {
-                          completed: function($event) {
-                            _vm.showInput = true
-                          }
-                        }
-                      })
-                    : _vm._e(),
-                  _vm._v(" "),
-                  _c("h2", { staticClass: "text-3xl text-center" }, [
-                    _vm._v(_vm._s(_vm.currentQuestion.question))
-                  ]),
-                  _vm._v(" "),
-                  _vm.showInput
-                    ? _c("input", {
+              }),
+              _vm._v(" "),
+              _vm.currentQuestion
+                ? _c(
+                    "div",
+                    {
+                      staticClass:
+                        "p-2 absolute inset-0 bg-purple-900 flex flex-col"
+                    },
+                    [
+                      _c(
+                        "div",
+                        { staticClass: "flex items-center flex-grow" },
+                        [
+                          _c(
+                            "div",
+                            { staticClass: "p-16 w-full" },
+                            [
+                              !_vm.showInput
+                                ? _c("progress-bar", {
+                                    key: "quetionProgress",
+                                    attrs: { milliseconds: 4000 },
+                                    on: {
+                                      completed: function($event) {
+                                        _vm.showInput = true
+                                      }
+                                    }
+                                  })
+                                : _vm._e(),
+                              _vm._v(" "),
+                              _vm.showInput
+                                ? _c("progress-bar", {
+                                    key: "answerProgress",
+                                    attrs: {
+                                      milliseconds: 7000,
+                                      reverse: true
+                                    },
+                                    on: { completed: _vm.handleTimesUp }
+                                  })
+                                : _vm._e(),
+                              _vm._v(" "),
+                              _c(
+                                "h2",
+                                {
+                                  staticClass:
+                                    "text-5xl text-center leading-tight font-bold"
+                                },
+                                [_vm._v(_vm._s(_vm.currentQuestion.question))]
+                              )
+                            ],
+                            1
+                          )
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c("input", {
                         directives: [
                           {
                             name: "model",
@@ -2717,8 +2775,17 @@ var render = function() {
                             expression: "currentAnswer"
                           }
                         ],
-                        staticClass: "text-black",
-                        attrs: { type: "text", autofocus: "" },
+                        staticClass:
+                          "outline-none bg-white bg-opacity-5 rounded-md text-white w-full bg-transparent text-3xl font-bold opacity-1 p-6",
+                        class: {
+                          "opacity-1": _vm.showInput,
+                          "opacity-0": !_vm.showInput
+                        },
+                        attrs: {
+                          placeholder: "Enter your answer",
+                          type: "text",
+                          autofocus: ""
+                        },
                         domProps: { value: _vm.currentAnswer },
                         on: {
                           keydown: function($event) {
@@ -2744,52 +2811,45 @@ var render = function() {
                           }
                         }
                       })
-                    : _vm._e(),
-                  _vm._v(" "),
-                  _vm.showInput
-                    ? _c("progress-bar", {
-                        key: "answerProgress",
-                        attrs: { milliseconds: 7000, reverse: true },
-                        on: { completed: _vm.handleTimesUp }
-                      })
-                    : _vm._e()
-                ],
-                1
-              )
-            : _vm._e(),
+                    ]
+                  )
+                : _vm._e()
+            ],
+            2
+          ),
           _vm._v(" "),
           _c(
             "div",
-            {
-              staticClass:
-                "flex w-full text-center uppercase text-sm bg-gradient-to-r from-orange-300 via-pink-500 to-purple-600"
-            },
+            { staticClass: "flex w-full text-center uppercase text-sm" },
             _vm._l(_vm.scores, function(score, user) {
-              return _c(
-                "div",
-                {
-                  key: user,
-                  staticClass:
-                    "w-1/3 p-2 last:border-r-0 border-r border-white border-opacity-25"
-                },
-                [
-                  _c("div", { staticClass: "p-2 rounded-lg" }, [
-                    _vm._v(
-                      "\n                    " +
-                        _vm._s(user) +
-                        "\n                    "
-                    ),
-                    _c("div", { staticClass: "text-4xl font-bold" }, [
-                      _vm._v(_vm._s(score))
+              return _c("div", { key: user, staticClass: "flex-grow pt-1" }, [
+                _c(
+                  "div",
+                  {
+                    staticClass: "p-1 rounded-lg",
+                    class: {
+                      "bg-purple-900": _vm.currentUser == user,
+                      "": !_vm.currentUser == user
+                    }
+                  },
+                  [
+                    _c("div", { staticClass: "py-2" }, [
+                      _vm._v(
+                        "\n                        " +
+                          _vm._s(user) +
+                          "\n                        "
+                      ),
+                      _c("div", { staticClass: "text-4xl font-bold" }, [
+                        _vm._v(_vm._s(score))
+                      ])
                     ])
-                  ])
-                ]
-              )
+                  ]
+                )
+              ])
             }),
             0
           )
-        ],
-        2
+        ]
       )
     ]
   )
@@ -2816,8 +2876,8 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "flex items-center w-64" }, [
-    _c("div", { staticClass: "w-full bg-white rounded-full mr-2" }, [
+  return _c("div", { staticClass: "flex items-center justify-center" }, [
+    _c("div", { staticClass: "w-64 bg-white rounded-full mb-12" }, [
       _c("div", {
         staticClass: "rounded-full bg-green-500 h-2",
         style: _vm.width
@@ -15384,8 +15444,8 @@ var app = new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Users/jasongroulx/Developer/Sandbox/devpardy/resources/js/site.js */"./resources/js/site.js");
-module.exports = __webpack_require__(/*! /Users/jasongroulx/Developer/Sandbox/devpardy/resources/css/tailwind.css */"./resources/css/tailwind.css");
+__webpack_require__(/*! /Users/maximsiebert/Documents/Projects/devpardy/resources/js/site.js */"./resources/js/site.js");
+module.exports = __webpack_require__(/*! /Users/maximsiebert/Documents/Projects/devpardy/resources/css/tailwind.css */"./resources/css/tailwind.css");
 
 
 /***/ })

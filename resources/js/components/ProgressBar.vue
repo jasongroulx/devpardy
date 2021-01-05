@@ -1,6 +1,6 @@
 <template>
-    <div class="flex items-center w-64">
-        <div class="w-full bg-white rounded-full mr-2">
+    <div class="flex items-center justify-center">
+        <div class="w-64 bg-white rounded-full mb-12">
             <div
                 class="rounded-full bg-green-500 h-2"
                 :style="width"
