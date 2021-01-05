@@ -7,7 +7,7 @@
                     :key="title"
                     class="w-1/6 last:border-r-0 border-r border-purple-600 even:bg-purple-800"
                     >
-                    <div class="px-4 py-10 text-center border-b border-purple-600 uppercase font-bold">
+                    <div class="px-4 py-6 text-center border-b border-purple-600 uppercase font-bold">
                         <p>{{ title }}</p>
                     </div>
                     <div
@@ -15,7 +15,7 @@
                         :key="question.id"
                         :completed="question.completed"
                         @click="selectQuestion(question)"
-                        class="px-4 py-10 text-center border-b border-purple-600 text-3xl font-bold"
+                        class="px-4 py-6 text-center border-b border-purple-600 text-3xl font-bold"
                         :class="{'cursor-default': question.completed, 'cursor-pointer': !question.completed}"
                         >
                         <span :class="{'opacity-0' : question.completed}">

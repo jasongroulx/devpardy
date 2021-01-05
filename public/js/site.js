@@ -2670,7 +2670,7 @@ var render = function() {
                       "div",
                       {
                         staticClass:
-                          "px-4 py-10 text-center border-b border-purple-600 uppercase font-bold"
+                          "px-4 py-6 text-center border-b border-purple-600 uppercase font-bold"
                       },
                       [_c("p", [_vm._v(_vm._s(title))])]
                     ),
@@ -2681,7 +2681,7 @@ var render = function() {
                         {
                           key: question.id,
                           staticClass:
-                            "px-4 py-10 text-center border-b border-purple-600 text-3xl font-bold",
+                            "px-4 py-6 text-center border-b border-purple-600 text-3xl font-bold",
                           class: {
                             "cursor-default": question.completed,
                             "cursor-pointer": !question.completed
