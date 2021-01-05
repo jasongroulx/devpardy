@@ -2681,7 +2681,7 @@ var render = function() {
                         {
                           key: question.id,
                           staticClass:
-                            "px-4 py-6 text-center border-b border-purple-600 text-3xl font-bold",
+                            "px-4 py-10 text-center border-b border-purple-600 text-3xl font-bold",
                           class: {
                             "cursor-default": question.completed,
                             "cursor-pointer": !question.completed
@@ -2833,7 +2833,7 @@ var render = function() {
                     }
                   },
                   [
-                    _c("div", { staticClass: "py-2" }, [
+                    _c("div", { staticClass: "py-4" }, [
                       _vm._v(
                         "\n                        " +
                           _vm._s(user) +

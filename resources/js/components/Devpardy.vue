@@ -15,7 +15,7 @@
                         :key="question.id"
                         :completed="question.completed"
                         @click="selectQuestion(question)"
-                        class="px-4 py-6 text-center border-b border-purple-600 text-3xl font-bold"
+                        class="px-4 py-10 text-center border-b border-purple-600 text-3xl font-bold"
                         :class="{'cursor-default': question.completed, 'cursor-pointer': !question.completed}"
                         >
                         <span :class="{'opacity-0' : question.completed}">
@@ -60,7 +60,7 @@
                     class="p-1 rounded-lg"
                     :class="{'bg-purple-900': currentUser == user, '': !currentUser == user}"
                     >
-                        <div class="py-2">
+                        <div class="py-4">
                             {{ user }}
                             <div class="text-4xl font-bold">{{ score }}</div>
                         </div>
