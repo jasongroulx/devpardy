@@ -1938,6 +1938,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _ProgressBar__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ProgressBar */ "./resources/js/components/ProgressBar.vue");
+/* harmony import */ var _QuestionPane__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./QuestionPane */ "./resources/js/components/QuestionPane.vue");
 //
 //
 //
@@ -1998,28 +1999,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
-    ProgressBar: _ProgressBar__WEBPACK_IMPORTED_MODULE_1__["default"]
+    ProgressBar: _ProgressBar__WEBPACK_IMPORTED_MODULE_1__["default"],
+    QuestionPane: _QuestionPane__WEBPACK_IMPORTED_MODULE_2__["default"]
   },
   props: ['topics'],
   data: function data() {
@@ -2152,6 +2138,61 @@ __webpack_require__.r(__webpack_exports__);
       this.value = 0;
     }
   }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/QuestionPane.vue?vue&type=script&lang=js&":
+/*!***********************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/QuestionPane.vue?vue&type=script&lang=js& ***!
+  \***********************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _ProgressBar__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ProgressBar */ "./resources/js/components/ProgressBar.vue");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  components: {
+    ProgressBar: _ProgressBar__WEBPACK_IMPORTED_MODULE_1__["default"]
+  },
+  props: ['currentQuestion', 'submitAnswer', 'handleAnswer', 'handleTimesUp', 'resetState', 'showInput', 'currentAnswer', 'currentUser', 'scores']
 });
 
 /***/ }),
@@ -2641,13 +2682,13 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { staticClass: "mx-auto max-w-screen-xl px-4 pb-4 -mt-8 z-10 relative" },
+    { staticClass: "relative z-10 px-4 pb-4 mx-auto -mt-8 max-w-screen-xl" },
     [
       _c(
         "div",
         {
           staticClass:
-            "rounded-lg overflow-hidden p-1 bg-gradient-to-r from-yellow-500 to-pink-600"
+            "p-1 overflow-hidden rounded-lg bg-gradient-to-r from-yellow-500 to-pink-600"
         },
         [
           _c(
@@ -2663,14 +2704,14 @@ var render = function() {
                   {
                     key: title,
                     staticClass:
-                      "w-1/6 last:border-r-0 border-r border-purple-600 even:bg-purple-800"
+                      "w-1/6 border-r border-purple-600 last:border-r-0 even:bg-purple-800"
                   },
                   [
                     _c(
                       "div",
                       {
                         staticClass:
-                          "px-4 py-6 text-center border-b border-purple-600 uppercase font-bold"
+                          "px-4 py-6 font-bold text-center uppercase border-b border-purple-600"
                       },
                       [_c("p", [_vm._v(_vm._s(title))])]
                     ),
@@ -2681,7 +2722,7 @@ var render = function() {
                         {
                           key: question.id,
                           staticClass:
-                            "px-4 py-6 text-center border-b border-purple-600 text-3xl font-bold",
+                            "px-4 py-6 text-3xl font-bold text-center border-b border-purple-600",
                           class: {
                             "cursor-default": question.completed,
                             "cursor-pointer": !question.completed
@@ -2713,114 +2754,26 @@ var render = function() {
                 )
               }),
               _vm._v(" "),
-              _vm.currentQuestion
-                ? _c(
-                    "div",
-                    {
-                      staticClass:
-                        "p-2 absolute inset-0 bg-purple-900 flex flex-col"
-                    },
-                    [
-                      _c(
-                        "div",
-                        { staticClass: "flex items-center flex-grow" },
-                        [
-                          _c(
-                            "div",
-                            { staticClass: "p-16 w-full" },
-                            [
-                              !_vm.showInput
-                                ? _c("progress-bar", {
-                                    key: "quetionProgress",
-                                    attrs: { milliseconds: 4000 },
-                                    on: {
-                                      completed: function($event) {
-                                        _vm.showInput = true
-                                      }
-                                    }
-                                  })
-                                : _vm._e(),
-                              _vm._v(" "),
-                              _vm.showInput
-                                ? _c("progress-bar", {
-                                    key: "answerProgress",
-                                    attrs: {
-                                      milliseconds: 7000,
-                                      reverse: true
-                                    },
-                                    on: { completed: _vm.handleTimesUp }
-                                  })
-                                : _vm._e(),
-                              _vm._v(" "),
-                              _c(
-                                "h2",
-                                {
-                                  staticClass:
-                                    "text-5xl text-center leading-tight font-bold"
-                                },
-                                [_vm._v(_vm._s(_vm.currentQuestion.question))]
-                              )
-                            ],
-                            1
-                          )
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _c("input", {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.currentAnswer,
-                            expression: "currentAnswer"
-                          }
-                        ],
-                        staticClass:
-                          "outline-none bg-white bg-opacity-5 rounded-md text-white w-full bg-transparent text-3xl font-bold opacity-1 p-6",
-                        class: {
-                          "opacity-1": _vm.showInput,
-                          "opacity-0": !_vm.showInput
-                        },
-                        attrs: {
-                          placeholder: "Enter your answer",
-                          type: "text",
-                          autofocus: ""
-                        },
-                        domProps: { value: _vm.currentAnswer },
-                        on: {
-                          keydown: function($event) {
-                            if (
-                              !$event.type.indexOf("key") &&
-                              _vm._k(
-                                $event.keyCode,
-                                "enter",
-                                13,
-                                $event.key,
-                                "Enter"
-                              )
-                            ) {
-                              return null
-                            }
-                            return _vm.submitAnswer($event)
-                          },
-                          input: function($event) {
-                            if ($event.target.composing) {
-                              return
-                            }
-                            _vm.currentAnswer = $event.target.value
-                          }
-                        }
-                      })
-                    ]
-                  )
-                : _vm._e()
+              _c("question-pane", {
+                attrs: {
+                  currentQuestion: _vm.currentQuestion,
+                  showInput: _vm.showInput,
+                  submitAnswer: _vm.submitAnswer,
+                  handleAnswer: _vm.handleAnswer,
+                  handleTimesUp: _vm.handleTimesUp,
+                  resetState: _vm.resetState,
+                  currentAnswer: _vm.currentQuestion,
+                  currentUser: _vm.currentUser,
+                  scores: _vm.scores
+                }
+              })
             ],
             2
           ),
           _vm._v(" "),
           _c(
             "div",
-            { staticClass: "flex w-full text-center uppercase text-sm" },
+            { staticClass: "flex w-full text-sm text-center uppercase" },
             _vm._l(_vm.scores, function(score, user) {
               return _c("div", { key: user, staticClass: "flex-grow pt-1" }, [
                 _c(
@@ -2884,6 +2837,110 @@ var render = function() {
       })
     ])
   ])
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/QuestionPane.vue?vue&type=template&id=7d35854e&":
+/*!***************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/QuestionPane.vue?vue&type=template&id=7d35854e& ***!
+  \***************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _vm.currentQuestion
+    ? _c(
+        "div",
+        { staticClass: "absolute inset-0 flex flex-col p-2 bg-purple-900" },
+        [
+          _c("div", { staticClass: "flex items-center flex-grow" }, [
+            _c(
+              "div",
+              { staticClass: "w-full p-16" },
+              [
+                !_vm.showInput
+                  ? _c("progress-bar", {
+                      key: "quetionProgress",
+                      attrs: { milliseconds: 4000 },
+                      on: {
+                        completed: function($event) {
+                          _vm.showInput = true
+                        }
+                      }
+                    })
+                  : _vm._e(),
+                _vm._v(" "),
+                _vm.showInput
+                  ? _c("progress-bar", {
+                      key: "answerProgress",
+                      attrs: { milliseconds: 7000, reverse: true },
+                      on: { completed: _vm.handleTimesUp }
+                    })
+                  : _vm._e(),
+                _vm._v(" "),
+                _c(
+                  "h2",
+                  {
+                    staticClass: "text-5xl font-bold leading-tight text-center"
+                  },
+                  [_vm._v(_vm._s(_vm.currentQuestion.question))]
+                )
+              ],
+              1
+            )
+          ]),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.currentAnswer,
+                expression: "currentAnswer"
+              }
+            ],
+            staticClass:
+              "w-full p-6 text-3xl font-bold text-white bg-transparent bg-white outline-none bg-opacity-5 rounded-md opacity-1",
+            class: { "opacity-1": _vm.showInput, "opacity-0": !_vm.showInput },
+            attrs: {
+              placeholder: "Enter your answer",
+              type: "text",
+              autofocus: ""
+            },
+            domProps: { value: _vm.currentAnswer },
+            on: {
+              keydown: function($event) {
+                if (
+                  !$event.type.indexOf("key") &&
+                  _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
+                ) {
+                  return null
+                }
+                return _vm.submitAnswer($event)
+              },
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.currentAnswer = $event.target.value
+              }
+            }
+          })
+        ]
+      )
+    : _vm._e()
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -15360,6 +15417,75 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/QuestionPane.vue":
+/*!**************************************************!*\
+  !*** ./resources/js/components/QuestionPane.vue ***!
+  \**************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _QuestionPane_vue_vue_type_template_id_7d35854e___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./QuestionPane.vue?vue&type=template&id=7d35854e& */ "./resources/js/components/QuestionPane.vue?vue&type=template&id=7d35854e&");
+/* harmony import */ var _QuestionPane_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./QuestionPane.vue?vue&type=script&lang=js& */ "./resources/js/components/QuestionPane.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _QuestionPane_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _QuestionPane_vue_vue_type_template_id_7d35854e___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _QuestionPane_vue_vue_type_template_id_7d35854e___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/QuestionPane.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/QuestionPane.vue?vue&type=script&lang=js&":
+/*!***************************************************************************!*\
+  !*** ./resources/js/components/QuestionPane.vue?vue&type=script&lang=js& ***!
+  \***************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_QuestionPane_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./QuestionPane.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/QuestionPane.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_QuestionPane_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/QuestionPane.vue?vue&type=template&id=7d35854e&":
+/*!*********************************************************************************!*\
+  !*** ./resources/js/components/QuestionPane.vue?vue&type=template&id=7d35854e& ***!
+  \*********************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_QuestionPane_vue_vue_type_template_id_7d35854e___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./QuestionPane.vue?vue&type=template&id=7d35854e& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/QuestionPane.vue?vue&type=template&id=7d35854e&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_QuestionPane_vue_vue_type_template_id_7d35854e___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_QuestionPane_vue_vue_type_template_id_7d35854e___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
 /***/ "./resources/js/components/Sun.vue":
 /*!*****************************************!*\
   !*** ./resources/js/components/Sun.vue ***!
@@ -15444,8 +15570,8 @@ var app = new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Users/maximsiebert/Documents/Projects/devpardy/resources/js/site.js */"./resources/js/site.js");
-module.exports = __webpack_require__(/*! /Users/maximsiebert/Documents/Projects/devpardy/resources/css/tailwind.css */"./resources/css/tailwind.css");
+__webpack_require__(/*! /home/alex/code/mobs/devpardy/resources/js/site.js */"./resources/js/site.js");
+module.exports = __webpack_require__(/*! /home/alex/code/mobs/devpardy/resources/css/tailwind.css */"./resources/css/tailwind.css");
 
 
 /***/ })
