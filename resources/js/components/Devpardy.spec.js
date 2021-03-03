@@ -8,7 +8,21 @@ describe('Devpardy', () => {
 
 
   it('should mount component', () => {
-    const { getByText} = render(Devpardy)
-    getByText('Devpardy')
+    const { getByText} = render(Devpardy, {
+      props: {
+        topics: {
+          Vim: {
+            100: {
+              completed: false,
+              difficulty: 100,
+              id: 'random-id',
+              question: 'What is this',
+              topic: 'Vim'
+            }
+          }
+        }
+      }
+    })
+    getByText('Vim')
   });
 });
